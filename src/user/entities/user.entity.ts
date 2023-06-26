@@ -1,4 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Category } from './../../category/entities/category.entity';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Transaction } from 'src/transaction/entities/transaction.entity';
 
 @Entity()
 export class User {
@@ -10,6 +12,12 @@ export class User {
 
   @Column()
   password: string;
+
+  @OneToMany(() => Category, (category) => category.user, { onDelete: 'CASCADE' })
+  categories: Category[];
+
+  @OneToMany(() => Transaction, (transaction) => transaction.user, { onDelete: 'CASCADE' })
+  transactions: Transaction[];
 
   @CreateDateColumn()
   createdAt: Date;
