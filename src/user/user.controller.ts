@@ -13,7 +13,7 @@ export class UserController {
   }
 
   @Get()
-  findOne() {
-    return this.userService.findOne();
+  findOne(@Param() email: string) {
+    return this.userService.findOne(email);
   }
 }
